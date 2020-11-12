@@ -10,6 +10,8 @@
     $ export STRIPE_SECRET_KEY=UPDATE_ME
     ```
 
+
+
 1. Run the server-side Flask app in one terminal window:
 
     ```sh
