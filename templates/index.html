@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login with Google</title>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  </head>  
+  <body>
+    <div id="myGoogleButton"></div>
+    <a href="#" onclick="signOut();">Sign out</a>
+  </body>
+  <script type="text/javascript">
+    function renderButton() {
+	const render =     {
+	    'scope': 'profile email',
+	    'width': 240,
+	    'height': 40,
+	    'longtitle': true,
+	    'theme': 'dark',
+	    'onsuccess': onSignIn,
+	    'onfailure': () => {}
+	}
+        gapi.signin2.render('myGoogleButton', render);
+    }
+    function init() {
+	gapi.load('auth2', function() {
+	    const clientId = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com';
+	    const payload = {
+		client_id: clientId
+	    }
+	    gapi.auth2.init(payload).then(function () {
+		renderButton();
+	    });
+	});
+    }
+    function onSignIn(googleUser) {
+	var profile = googleUser.getBasicProfile();
+	console.log('ID: ' + profile.getId());
+	console.log('Name: ' + profile.getName());
+	console.log('Image URL: ' + profile.getImageUrl());
+	console.log('Email: ' + profile.getEmail());
+    }
+    function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+	    console.log('User signed out.');
+	});
+    }
+  </script>
+</html>

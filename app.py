@@ -2,7 +2,7 @@ import os
 import uuid
 
 import stripe_wrapper as stripe_w
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 
 import json 
@@ -20,6 +20,10 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 # read books
 book.read_books()
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 # sanity check route
 @app.route('/foo', methods=['GET'])
@@ -55,4 +59,4 @@ def create_checkout_session_r():
     return stripe_w.create_checkout_session()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5000)
