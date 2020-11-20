@@ -59,4 +59,4 @@ def create_checkout_session_r():
     return stripe_w.create_checkout_session()
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=5050)
